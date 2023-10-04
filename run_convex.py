@@ -8,8 +8,8 @@ t = Void()
 print("Predefined triangle")
 Figure.k = R2Point()
 t = t.add(Figure.k)
-Figure.l = R2Point()
-t = t.add(Figure.l)
+Figure.n = R2Point()
+t = t.add(Figure.n)
 Figure.m = R2Point()
 t = t.add(Figure.m)
 print("\nPlane points")
@@ -17,7 +17,7 @@ print("\nPlane points")
 try:
     while True:
         f = f.add(R2Point())
-        print(f"S = {f.area()}, P = {f.perimeter()}, C = {f.rib_counter()}")
+        print(f"S = {f.area()}, P = {f.perimeter()}, C = {f.vert_counter()}")
         print()
-except(EOFError, KeyboardInterrupt):
+except (EOFError, KeyboardInterrupt):
     print("\nStop")

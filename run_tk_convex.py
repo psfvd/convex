@@ -12,10 +12,8 @@ def point_draw(self, tk, color):
     tk.draw_point(self.p, color)
 
 
-
 def segment_draw(self, tk, color):
     tk.draw_line(self.p, self.q, color)
-
 
 
 def polygon_draw(self, tk, color):
@@ -38,8 +36,8 @@ print("Predefined triangle")
 Figure.k = R2Point()
 t = t.add(Figure.k)
 t.draw(tk, "red")
-Figure.l = R2Point()
-t = t.add(Figure.l)
+Figure.n = R2Point()
+t = t.add(Figure.n)
 t.draw(tk, "red")
 Figure.m = R2Point()
 t = t.add(Figure.m)
@@ -53,6 +51,6 @@ try:
         t.draw(tk, "red")
         f.draw(tk, "black")
         print(f"S = {f.area()}, P = {f.perimeter()}, C = {f.vert_counter()}\n")
-except(EOFError, KeyboardInterrupt):
+except (EOFError, KeyboardInterrupt):
     print("\nStop")
     tk.close()

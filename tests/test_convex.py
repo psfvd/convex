@@ -40,8 +40,9 @@ class TestPoint:
     # Инициализация (выполняется для каждого из тестов класса) ()
     def setup_method(self):
         self.f = Point(R2Point(0.0, 0.0))
+        self.g = Point(R2Point(10.0, 0.0))
         Figure.k = R2Point(-10.0, -10.0)
-        Figure.l = R2Point(0.0, 10.0)
+        Figure.n = R2Point(0.0, 10.0)
         Figure.m = R2Point(10.0, -10.0)
 
     # Одноугольник является фигурой
@@ -60,9 +61,12 @@ class TestPoint:
     def test_аrea(self):
         assert self.f.area() == 0.0
 
-    # Количество вершин одноугольника вне заданного треугольника может быть равно нулю ()
-    def test_rib_counter(self):
+    # Количество вершин одноугольника вне треугольника равно нулю ()
+    def test_vert_counter(self):
         assert self.f.vert_counter() == 0
+
+    def test_vert_counter2(self):
+        assert self.g.vert_counter() == 1
 
     # При добавлении точки одноугольник может не измениться
     def test_add1(self):
@@ -78,9 +82,11 @@ class TestSegment:
     # Инициализация (выполняется для каждого из тестов класса) ()
     def setup_method(self):
         self.f = Segment(R2Point(0.0, 0.0), R2Point(1.0, 0.0))
-        # Figure.k = R2Point(-10.0, -10.0)
-        # Figure.l = R2Point(0.0, 10.0)
-        # Figure.m = R2Point(10.0, -10.0)
+        self.g = Segment(R2Point(0.0, 0.0), R2Point(10.0, 0.0))
+        self.r = Segment(R2Point(9.0, 0.0), R2Point(10.0, 0.0))
+        Figure.k = R2Point(-10.0, -10.0)
+        Figure.n = R2Point(0.0, 10.0)
+        Figure.m = R2Point(10.0, -10.0)
 
     # Двуугольник является фигурой
     def test_figure(self):
@@ -98,16 +104,15 @@ class TestSegment:
     def test_area(self):
         assert self.f.area() == 0.0
 
-    # Количество вершин двуугольника вне заданного треугольника может равнятся нулю ()
+    # Количество вершин двуугольника внетреугольника равнятся нулю ()
     def test_vert_counter(self):
         assert self.f.vert_counter() == 0
 
-    # # двуугольник может быть внутри заданного треугольника ()
-    # def test_is_rib_inside(self):
-    #     k = R2Point(-10.0, -10.0)
-    #     l = R2Point(0.0, 10.0)
-    #     m = R2Point(10.0, -10.0)
-    #     assert R2Point.is__inside(R2Point(0.0, 0.0), R2Point(1.0, 0.0), k, l, m) == 1
+    def test_vert_counter1(self):
+        assert self.g.vert_counter() == 1
+
+    def test_vert_counter1(self):
+        assert self.r.vert_counter() == 2
 
     # При добавлении точки двуугольник может не измениться
     def test_add1(self):
@@ -132,7 +137,7 @@ class TestPolygon:
                 1.0, 0.0), R2Point(
                 0.0, 1.0))
         Figure.k = R2Point(-10.0, -10.0)
-        Figure.l = R2Point(0.0, 10.0)
+        Figure.n = R2Point(0.0, 10.0)
         Figure.m = R2Point(10.0, -10.0)
 
     # Многоугольник является фигурой
@@ -143,12 +148,15 @@ class TestPolygon:
     def test_polygon(self):
         assert isinstance(self.f, Polygon)
 
-    # Только что инициализированный многоугольник может иметь 3 вершины, находящихся внутри заданного треугольника ()
+    # Только что инициализированный многоугольник может
+    # иметь 3 вершины, находящихся внутри заданного треугольника ()
     def test_counter(self):
         k = R2Point(-10.0, -10.0)
-        l = R2Point(0.0, 10.0)
+        n = R2Point(0.0, 10.0)
         m = R2Point(10.0, -10.0)
-        assert R2Point.counter(R2Point(0.0, 0.0), R2Point(1.0, 0.0), R2Point(0.0, 1.0), k, l, m) == 0
+        assert R2Point.counter(R2Point(0.0, 0.0),
+                               R2Point(1.0, 0.0),
+                               R2Point(0.0, 1.0), k, n, m) == 0
 
     # Изменение количества вершин многоугольника
     #   изначально их три

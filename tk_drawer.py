@@ -46,7 +46,6 @@ class TkDrawer:
             x(p) + 1, y(p) + 1, x(p) - 1, y(p) - 1, fill=color)
         self.root.update()
 
-
     # Рисование цветной линии ()
     def draw_line(self, p, q, color):
         self.canvas.create_line(x(p), y(p), x(q), y(q), fill=color, width=2)

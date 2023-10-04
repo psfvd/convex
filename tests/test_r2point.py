@@ -2,22 +2,16 @@ from pytest import approx
 from math import sqrt
 from r2point import R2Point
 
+
 class TestR2Point:
 
     # Одноугольник может быть внутри заданного треугольника ()
     def test_is_outside_triangle(self):
         k = R2Point(-10.0, -10.0)
-        l = R2Point(0.0, 10.0)
+        n = R2Point(0.0, 10.0)
         m = R2Point(10.0, -10.0)
         f = R2Point(0.0, 0.0)
-        assert R2Point.is_outside_triangle(f, k, l, m) == 0
-
-    # Двуугольник может быть внутри заданного треугольника ()
-    # def test_is_rib_inside(self):
-    #     k = R2Point(-10.0, -10.0)
-    #     l = R2Point(0.0, 10.0)
-    #     m = R2Point(10.0, -10.0)
-    #     assert R2Point.is_rib_inside(R2Point(0.0, 0.0), R2Point(1.0, 0.0), k, l, m) == 1
+        assert R2Point.is_outside_triangle(f, k, n, m) == 0
 
     # Расстояние от точки до самой себя равно нулю
     def test_dist1(self):

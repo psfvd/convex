@@ -23,12 +23,14 @@ class R2Point:
         s1 = abs(R2Point.area(a, b, d))
         s2 = abs(R2Point.area(b, c, d))
         s3 = abs(R2Point.area(c, a, d))
-        return not(abs(R2Point.area(a, b, c)) == s1 + s2 + s3)
+        return not (abs(R2Point.area(a, b, c)) == s1 + s2 + s3)
 
     # Количество вершин, лежащих вне треугольника ()
     @staticmethod
-    def counter(a, b, c, k, l, m):
-        return R2Point.is_outside_triangle(a, k, l, m) + R2Point.is_outside_triangle(b, k, l, m) + R2Point.is_outside_triangle(c, k, l, m)
+    def counter(a, b, c, k, n, m):
+        return R2Point.is_outside_triangle(a, k, n, m) + \
+                R2Point.is_outside_triangle(b, k, n, m) + \
+                R2Point.is_outside_triangle(c, k, n, m)
 
     # Лежат ли точки на одной прямой?
     @staticmethod
@@ -62,5 +64,7 @@ if __name__ == "__main__":
     x = R2Point(1.0, 1.0)
     print(type(x), x.__dict__)
     print(x.dist(R2Point(1.0, 0.0)))
-    x, y, z, a, b, c = R2Point(1.0, 0.0), R2Point(0.0, 1.0), R2Point(0.0, 1.0), R2Point(-5.0, -5.0), R2Point(0.0, 4.0), R2Point(3.0, -4.0)
+    x, y, z, a, b, c = R2Point(1.0, 0.0), R2Point(0.0, 1.0),
+    R2Point(0.0, 1.0), R2Point(-5.0, -5.0),
+    R2Point(0.0, 4.0), R2Point(3.0, -4.0)
     print(R2Point.is_outside_triangle(x, a, b, c))

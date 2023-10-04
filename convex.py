@@ -22,7 +22,6 @@ class Void(Figure):
         return Point(p)
 
 
-
 class Point(Figure):
     """ "Одноугольник" """
 
@@ -33,11 +32,10 @@ class Point(Figure):
         return self if self.p == q else Segment(self.p, q)
 
     def vert_counter(self):
-        if R2Point.is_outside_triangle(self.p, self.k, self.l, self.m):
+        if R2Point.is_outside_triangle(self.p, self.k, self.n, self.m):
             return 1
         else:
             return 0
-
 
 
 class Segment(Figure):
@@ -51,12 +49,15 @@ class Segment(Figure):
 
     # Вхождение двуугольника в треугольник (надо ли оно)
     def vert_counter(self):
-        if R2Point.is_outside_triangle(self.p, self.k, self.l, self.m) and \
-            not(R2Point.is_outside_triangle(self.q, self.k, self.l, self.m)) or \
-            not(R2Point.is_outside_triangle(self.p, self.k, self.l, self.m)) and \
-            R2Point.is_outside_triangle(self.q, self.k, self.l, self.m):
+        if R2Point.is_outside_triangle(self.p, self.k, self.n, self.m) and \
+            not (R2Point.is_outside_triangle(self.q, self.k,
+                                             self.n, self.m)) or \
+            not (R2Point.is_outside_triangle(self.p, self.k,
+                                             self.n, self.m)) and \
+                R2Point.is_outside_triangle(self.q, self.k, self.n, self.m):
             return 1
-        elif R2Point.is_outside_triangle(self.p, self.k, self.l, self.m) and R2Point.is_outside_triangle(self.q, self.k, self.l, self.m):
+        elif R2Point.is_outside_triangle(self.p, self.k, self.n, self.m) and \
+                R2Point.is_outside_triangle(self.q, self.k, self.n, self.m):
             return 2
         else:
             return 0
@@ -87,7 +88,7 @@ class Polygon(Figure):
         self._perimeter = a.dist(b) + b.dist(c) + c.dist(a)
         self._area = abs(R2Point.area(a, b, c))
         # Инитиализация счетчика вершин в многоугольнике ()
-        self._vert_counter = R2Point.counter(a, b, c, self.k, self.l, self.m)
+        self._vert_counter = R2Point.counter(a, b, c, self.k, self.n, self.m)
 
     def perimeter(self):
         return self._perimeter
@@ -124,7 +125,7 @@ class Polygon(Figure):
                 self._perimeter -= p.dist(self.points.first())
                 self._area += abs(R2Point.area(t, p, self.points.first()))
                 # ()
-                if R2Point.is_outside_triangle(p, self.k, self.l, self.m) == 1:
+                if R2Point.is_outside_triangle(p, self.k, self.n, self.m) == 1:
                     self._vert_counter -= 1
                 p = self.points.pop_first()
             self.points.push_first(p)
@@ -135,7 +136,7 @@ class Polygon(Figure):
                 self._perimeter -= p.dist(self.points.last())
                 self._area += abs(R2Point.area(t, p, self.points.last()))
                 # ()
-                if R2Point.is_outside_triangle(p, self.k, self.l, self.m) == 1:
+                if R2Point.is_outside_triangle(p, self.k, self.n, self.m) == 1:
                     self._vert_counter -= 1
                 p = self.points.pop_last()
             self.points.push_last(p)
@@ -144,7 +145,8 @@ class Polygon(Figure):
             self._perimeter += t.dist(self.points.first()) + \
                 t.dist(self.points.last())
             # ()
-            self._vert_counter += R2Point.is_outside_triangle(t, self.k, self.l, self.m)
+            self._vert_counter += R2Point.is_outside_triangle(t, self.k,
+                                                              self.n, self.m)
             self.points.push_first(t)
 
         return self
@@ -153,7 +155,7 @@ class Polygon(Figure):
 if __name__ == "__main__":
     print("Заданный треугольник")
     Figure.k = R2Point()
-    Figure.l = R2Point()
+    Figure.n = R2Point()
     Figure.m = R2Point()
     print("\nТочки плоскости")
     f = Void()
