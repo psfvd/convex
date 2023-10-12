@@ -222,4 +222,3 @@ class TestPolygon:
         assert self.f.vert_counter() == 1
         assert self.f.add(R2Point(1.0, -2.0)).vert_counter() == 2
         assert self.f.add(R2Point(3.0, 0.0)).vert_counter() == 2
-    
