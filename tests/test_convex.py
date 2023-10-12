@@ -84,6 +84,7 @@ class TestSegment:
         self.f = Segment(R2Point(0.0, 0.0), R2Point(1.0, 0.0))
         self.g = Segment(R2Point(0.0, 0.0), R2Point(10.0, 0.0))
         self.r = Segment(R2Point(9.0, 0.0), R2Point(10.0, 0.0))
+        self.q = Segment(R2Point(10.0, 0.0), R2Point(0.0, 0.0))
         Figure.k = R2Point(-10.0, -10.0)
         Figure.n = R2Point(0.0, 10.0)
         Figure.m = R2Point(10.0, -10.0)
@@ -104,15 +105,18 @@ class TestSegment:
     def test_area(self):
         assert self.f.area() == 0.0
 
-    # Количество вершин двуугольника внетреугольника равнятся нулю ()
+    # Количество вершин двуугольника вне треугольника равнятся 0, 1, 2
     def test_vert_counter(self):
         assert self.f.vert_counter() == 0
 
     def test_vert_counter1(self):
         assert self.g.vert_counter() == 1
 
-    def test_vert_counter1(self):
+    def test_vert_counter2(self):
         assert self.r.vert_counter() == 2
+
+    def test_vert_counter3(self):
+        assert self.q.vert_counter() == 1
 
     # При добавлении точки двуугольник может не измениться
     def test_add1(self):
@@ -123,7 +127,7 @@ class TestSegment:
         assert isinstance(self.f.add(R2Point(2.0, 0.0)), Segment)
 
     # При добавлении точки двуугольник может превратиться в треугольник
-    def test_add2(self):
+    def test_add3(self):
         assert isinstance(self.f.add(R2Point(0.0, 1.0)), Polygon)
 
 
@@ -136,9 +140,9 @@ class TestPolygon:
                 0.0, 0.0), R2Point(
                 1.0, 0.0), R2Point(
                 0.0, 1.0))
-        Figure.k = R2Point(-10.0, -10.0)
-        Figure.n = R2Point(0.0, 10.0)
-        Figure.m = R2Point(10.0, -10.0)
+        Figure.k = R2Point(-1.0, -1.0)
+        Figure.n = R2Point(0.0, 1.0)
+        Figure.m = R2Point(1.0, -1.0)
 
     # Многоугольник является фигурой
     def test_figure(self):
@@ -205,3 +209,17 @@ class TestPolygon:
 
     def test_area2(self):
         assert self.f.add(R2Point(1.0, 1.0)).area() == approx(1.0)
+
+    # def test_vert_counter101(self):
+    #     assert self.f.vert_counter == че тут писать
+
+    def test_vert_counter129(self):
+        assert self.f.vert_counter() == 1
+        assert self.f.add(R2Point(1.0, -2.0)).vert_counter() == 2
+        assert self.f.add(R2Point(1.0, -3.0)).vert_counter() == 2
+
+    def test_vert_counter140(self):
+        assert self.f.vert_counter() == 1
+        assert self.f.add(R2Point(1.0, -2.0)).vert_counter() == 2
+        assert self.f.add(R2Point(3.0, 0.0)).vert_counter() == 2
+    
